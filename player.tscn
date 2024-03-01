@@ -1,0 +1,95 @@
+[gd_scene load_steps=14 format=3 uid="uid://dhrnoevvjm64s"]
+
+[ext_resource type="Texture2D" uid="uid://cok00r0q6u608" path="res://Mini Pixel Pack 3/Player ship/Player_ship (16 x 16).png" id="1_2igdx"]
+[ext_resource type="Script" path="res://player.gd" id="1_aai73"]
+[ext_resource type="Texture2D" uid="uid://bnwi8wjkcvngi" path="res://Mini Pixel Pack 3/Player ship/Boosters (16 x 16).png" id="2_ffwta"]
+[ext_resource type="Texture2D" uid="uid://dknqbhngmc10i" path="res://Mini Pixel Pack 3/Player ship/Boosters_left (16 x 16).png" id="3_dsj81"]
+[ext_resource type="Texture2D" uid="uid://btrcppv8ialbl" path="res://Mini Pixel Pack 3/Player ship/Boosters_right (16 x 16).png" id="4_2fx7d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tv8r8"]
+atlas = ExtResource("2_ffwta")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmpcr"]
+atlas = ExtResource("2_ffwta")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fjib"]
+atlas = ExtResource("3_dsj81")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5eia"]
+atlas = ExtResource("3_dsj81")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r665i"]
+atlas = ExtResource("4_2fx7d")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxsmi"]
+atlas = ExtResource("4_2fx7d")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m4sdq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tv8r8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmpcr")
+}],
+"loop": true,
+"name": &"forward",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fjib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5eia")
+}],
+"loop": true,
+"name": &"left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r665i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxsmi")
+}],
+"loop": true,
+"name": &"right",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xjgvs"]
+size = Vector2(42, 38.75)
+
+[node name="Player" type="Area2D"]
+position = Vector2(9, 10)
+script = ExtResource("1_aai73")
+
+[node name="Ship" type="Sprite2D" parent="."]
+position = Vector2(12, 11)
+scale = Vector2(2.5625, 2.5625)
+texture = ExtResource("1_2igdx")
+hframes = 3
+frame = 1
+
+[node name="Boosters" type="AnimatedSprite2D" parent="Ship"]
+position = Vector2(-0.195122, 9.56097)
+scale = Vector2(0.390244, 0.390244)
+sprite_frames = SubResource("SpriteFrames_m4sdq")
+animation = &"forward"
+frame_progress = 0.720119
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(12, 9.625)
+shape = SubResource("RectangleShape2D_xjgvs")
+
+[node name="GunCooldown" type="Timer" parent="."]
+one_shot = true
