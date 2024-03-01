@@ -38,8 +38,8 @@ func shoot():
 	can_shoot = false
 	$GunCooldown.start()
 	var b = bullet.instantiate()
-	get_tree().root.add_child(b)
 	b.start(position + Vector2(0, -8))
+	get_tree().root.add_child(b)
 
 func _on_gun_cooldown_timeout():
 	can_shoot = true

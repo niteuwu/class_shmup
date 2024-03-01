@@ -5,7 +5,7 @@ func start(pos):
 	position = pos
 
 func _process(delta):
-	position.y = delta * speed
+	position.y += delta * speed
 
 func _on_area_entered(area):
 	if area.is_in_group("enemies"):
