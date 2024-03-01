@@ -3,7 +3,7 @@ extends Area2D
 @onready var screensize = get_viewport_rect().size
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	start()
 
 @export var speed = 150
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,3 +21,25 @@ func _process(delta):
 		$Ship/Boosters.animation = "forward"
 	position += input * speed * delta
 	position = position.clamp(Vector2(8, 8), screensize - Vector2(8, 8))
+	if Input.is_action_pressed("shoot"):
+		shoot()
+
+@export var cooldown = 0.25
+@export var bullet : PackedScene
+var can_shoot = true
+
+func start():
+	position = Vector2(screensize.x / 2, screensize.y - 64)
+	$GunCooldown.wait_time = cooldown
+
+func shoot():
+	if not can_shoot:
+		return
+	can_shoot = false
+	$GunCooldown.start()
+	var b = bullet.instantiate()
+	get_tree().root.add_child(b)
+	b.start(position + Vector2(0, -8))
+
+func _on_gun_cooldown_timeout():
+	can_shoot = true

@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://dhrnoevvjm64s"]
+[gd_scene load_steps=15 format=3 uid="uid://dhrnoevvjm64s"]
 
 [ext_resource type="Texture2D" uid="uid://cok00r0q6u608" path="res://Mini Pixel Pack 3/Player ship/Player_ship (16 x 16).png" id="1_2igdx"]
 [ext_resource type="Script" path="res://player.gd" id="1_aai73"]
 [ext_resource type="Texture2D" uid="uid://bnwi8wjkcvngi" path="res://Mini Pixel Pack 3/Player ship/Boosters (16 x 16).png" id="2_ffwta"]
+[ext_resource type="PackedScene" uid="uid://dhgrmx3oc62gs" path="res://bullet.tscn" id="2_haykf"]
 [ext_resource type="Texture2D" uid="uid://dknqbhngmc10i" path="res://Mini Pixel Pack 3/Player ship/Boosters_left (16 x 16).png" id="3_dsj81"]
 [ext_resource type="Texture2D" uid="uid://btrcppv8ialbl" path="res://Mini Pixel Pack 3/Player ship/Boosters_right (16 x 16).png" id="4_2fx7d"]
 
@@ -72,6 +73,7 @@ size = Vector2(42, 38.75)
 [node name="Player" type="Area2D"]
 position = Vector2(9, 10)
 script = ExtResource("1_aai73")
+bullet = ExtResource("2_haykf")
 
 [node name="Ship" type="Sprite2D" parent="."]
 position = Vector2(12, 11)
@@ -81,11 +83,11 @@ hframes = 3
 frame = 1
 
 [node name="Boosters" type="AnimatedSprite2D" parent="Ship"]
-position = Vector2(-0.195122, 9.56097)
-scale = Vector2(0.390244, 0.390244)
+position = Vector2(2.38419e-07, 11.7073)
+scale = Vector2(0.585366, 0.585366)
 sprite_frames = SubResource("SpriteFrames_m4sdq")
 animation = &"forward"
-frame_progress = 0.232649
+frame_progress = 0.649725
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(12, 9.625)
@@ -93,3 +95,5 @@ shape = SubResource("RectangleShape2D_xjgvs")
 
 [node name="GunCooldown" type="Timer" parent="."]
 one_shot = true
+
+[connection signal="timeout" from="GunCooldown" to="." method="_on_gun_cooldown_timeout"]
