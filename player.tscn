@@ -87,7 +87,7 @@ position = Vector2(2.38419e-07, 11.7073)
 scale = Vector2(0.585366, 0.585366)
 sprite_frames = SubResource("SpriteFrames_m4sdq")
 animation = &"forward"
-frame_progress = 0.649725
+autoplay = "forward"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(12, 9.625)
